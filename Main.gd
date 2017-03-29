@@ -8,15 +8,8 @@ func _ready():
 	bigAsteroid = preload("res://BigAsteroid.tscn")
 	var multi = 20
 	randomize()
-	var howManyBig = int(rand_range(1,5))
-	randomize()
 	for i in range(int(rand_range(5,20))):
-		var newInstance
-		if(howManyBig > 0):
-			newInstance = bigAsteroid.instance()
-			howManyBig = howManyBig - 1
-		else:
-			newInstance = smallAsteroid.instance()
+		var newInstance = bigAsteroid.instance()
 			
 		var xBuffer = newInstance.get_node("Sprite").get_texture().get_size().x + 5
 		var yBuffer = newInstance.get_node("Sprite").get_texture().get_size().y + 5
