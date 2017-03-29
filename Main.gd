@@ -1,10 +1,10 @@
 extends Node2D
 
-var asteroid
+var smallAsteroid
 var bigAsteroid
 
 func _ready():
-	asteroid = preload("res://Asteroid.tscn")
+	smallAsteroid = preload("res://SmallAsteroid.tscn")
 	bigAsteroid = preload("res://BigAsteroid.tscn")
 	var multi = 20
 	randomize()
@@ -16,7 +16,7 @@ func _ready():
 			newInstance = bigAsteroid.instance()
 			howManyBig = howManyBig - 1
 		else:
-			newInstance = asteroid.instance()
+			newInstance = smallAsteroid.instance()
 			
 		var xBuffer = newInstance.get_node("Sprite").get_texture().get_size().x + 5
 		var yBuffer = newInstance.get_node("Sprite").get_texture().get_size().y + 5

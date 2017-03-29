@@ -1,63 +1,26 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://BigAsteroid.gd" type="Script" id=1]
-[ext_resource path="res://Asteroid(big).png" type="Texture" id=2]
+[ext_resource path="res://Asteroid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BigAsteroid.gd" type="Script" id=2]
+[ext_resource path="res://ShapeAddScript.gd" type="Script" id=3]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -16.8928, 18.8655, -22.4151, 14.7633, -26.6751, 10.3455, -31.4085, 5.13876, -32.1973, -4.1702, -29.1995, -6.3791, 26.4964, 13.0277, -10.5816, 21.0744 )
-
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -3.32381, -29.4148, -1.43047, -31.7815, 5.19624, -31.3082, 15.9252, -25.6281 )
+radius = 25.0
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 26.9697, -13.3214, 31.3875, -5.74799, 32.0187, 4.34986, 28.0742, 12.5544, 26.4964, 13.0277, -29.1995, -6.3791, -22.7306, -18.6859, -14.0528, -22.7881, 15.9252, -25.6281 )
-
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 20.5008, 25.9656, 10.5607, 31.3301, 0.936218, 31.1723, -5.05938, 29.91, -10.5816, 21.0744, 26.4964, 13.0277, 23.8142, 22.3367 )
+extents = Vector2( 8, 5 )
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 15.9252, -25.6281, 26.3386, -17.7392, 26.9697, -13.3214 )
-
-[sub_resource type="ConvexPolygonShape2D" id=6]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -14.0528, -22.7881, -6.32161, -29.4148, -3.32381, -29.4148, 15.9252, -25.6281 )
-
-[node name="BigAsteroid" type="RigidBody2D"]
+[node name="BigAsteroid" instance=ExtResource( 1 )]
 
 input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/1/trigger = false
-shapes/2/shape = SubResource( 3 )
-shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/2/trigger = false
-shapes/3/shape = SubResource( 4 )
-shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/3/trigger = false
-shapes/4/shape = SubResource( 5 )
-shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/4/trigger = false
-shapes/5/shape = SubResource( 6 )
-shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/5/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 0
-mass = 50.0
+mass = 1.0
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -71,17 +34,31 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
-script/script = ExtResource( 1 )
+script/script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-texture = ExtResource( 2 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-
-build_mode = 0
-polygon = Vector2Array( -1.43047, -31.7815, -3.32381, -29.4148, -6.32161, -29.4148, -14.0528, -22.7881, -22.7306, -18.6859, -29.1995, -6.3791, -32.1973, -4.1702, -31.4085, 5.13876, -26.6751, 10.3455, -22.4151, 14.7633, -16.8928, 18.8655, -10.5816, 21.0744, -5.05938, 29.91, 0.936218, 31.1723, 10.5607, 31.3301, 20.5008, 25.9656, 23.8142, 22.3367, 26.4964, 13.0277, 28.0742, 12.5544, 32.0187, 4.34986, 31.3875, -5.74799, 26.9697, -13.3214, 26.3386, -17.7392, 15.9252, -25.6281, 5.19624, -31.3082 )
-shape_range = Vector2( 0, 5 )
+transform/pos = Vector2( 3.00493, -4.50739 )
+shape = SubResource( 1 )
 trigger = false
+_update_shape_index = 0
+script/script = ExtResource( 3 )
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 5.15131, 22.9662 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+script/script = ExtResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -25.5419, 0.858538 )
+transform/rot = 90.0
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+script/script = ExtResource( 3 )
 
 

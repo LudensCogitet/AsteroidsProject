@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://YellowShip.gd" type="Script" id=2]
+[ext_resource path="res://ShapeAddScript.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "FlameFlicker(yellow)"
+length = 0.3
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 0.0921402, 8.15436 ), Vector2( 0.0921402, 6.19343 ), Vector2( 0.0921402, 8.15436 ) ] }
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0, -8.5, 8.66025, 8, -8.66025, 8 )
+
+[node name="YellowShip" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+
+[node name="AnimationPlayer" parent="ShipBody/flame"]
+
+anims/FlameFlicker(yellow) = SubResource( 1 )
+next/FlameFlicker(yellow) = ""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+script/script = ExtResource( 3 )
+
+

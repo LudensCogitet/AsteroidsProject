@@ -1,4 +1,4 @@
-extends CollisionPolygon2D
+extends CollisionShape2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -7,4 +7,4 @@ extends CollisionPolygon2D
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	get_parent().set_shape(0,)
+	get_parent().add_shape(get_shape());

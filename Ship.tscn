@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=1]
 
-[ext_resource path="res://Ship(Claire).gd" type="Script" id=1]
-[ext_resource path="res://ship.png" type="Texture" id=2]
+[ext_resource path="res://Ship.gd" type="Script" id=1]
+[ext_resource path="res://ship(yellow).png" type="Texture" id=2]
 [ext_resource path="res://flame.png" type="Texture" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -43,7 +43,6 @@ tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2 ), "transitions":FloatArray( 1
 
 [node name="ship" type="RigidBody2D"]
 
-transform/pos = Vector2( 105.149, 62.1185 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -72,13 +71,6 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-
-build_mode = 0
-polygon = Vector2Array( -0.778496, -8.04597, -8.05753, 6.46603, -8.1036, 7.8942, -3.40447, 7.94027, -0.640285, 4.9918, 1.01823, 5.03787, 3.09137, 7.80206, 8.06691, 8.03241, 7.97477, 6.00533, 0.83395, -8.18417 )
-shape_range = Vector2( 0, 2 )
-trigger = false
 
 [node name="ShipBody" type="Sprite" parent="."]
 

@@ -1,10 +1,16 @@
 extends RigidBody2D
 
 var flame
-var flameAnim
+var animPlayer
+var animName
 var maxTurnVelocity = 5
 var velocityInc = 5
 var shot = false
+
+var throttleButton
+var leftButton
+var rightButton
+var fireButton
 
 var bullet
 var bullet_speed = 500
@@ -12,8 +18,8 @@ var bullet_speed = 500
 func _ready():
 	bullet = preload("res://Bullet.tscn")
 	flame = get_node("ShipBody/flame")
-	flameAnim = get_node("ShipBody/flame/AnimationPlayer")
-	flame.hide()                                    
+	flame.hide()    
+	animPlayer = get_node("ShipBody/flame/AnimationPlayer")                                
 	
 	set_process(true)
 	set_fixed_process(true)
@@ -22,19 +28,19 @@ func _ready():
 	print(Input.get_joy_name(2))
 
 func _process(delta):
-	if(Input.is_key_pressed(KEY_W) || Input.is_action_pressed("P1_throttle")):
-		if(!flameAnim.is_playing()):
-			flameAnim.play("FlameFlicker (copy)")
+	if(Input.is_key_pressed(throttleButton)):
+		if(!animPlayer.is_playing()):
+			animPlayer.play(animName)
 			flame.show()
 	else:
-		flameAnim.stop()
+		animPlayer.stop()
 		flame.hide()
 
 func _fixed_process(delta):
 	var velocity = get_angular_velocity()
 	var inc = velocityInc
 	
-	if(Input.is_key_pressed(KEY_C) || Input.is_action_pressed("P1_fire")):
+	if(Input.is_key_pressed(fireButton)):
 		if(shot == false):
 			var newBullet = bullet.instance()
 			get_parent().add_child(newBullet)
@@ -46,18 +52,18 @@ func _fixed_process(delta):
 	else:
 		shot = false
 	
-	if(Input.is_key_pressed(KEY_A) || Input.is_action_pressed("P1_left")):
+	if(Input.is_key_pressed(leftButton)):
 		if(velocity > -maxTurnVelocity):
 			if(velocity > 0):
 				inc *= 2
 				
 			set_angular_velocity(velocity-inc*delta)
-	if(Input.is_key_pressed(KEY_D) || Input.is_action_pressed("P1_right")):
+	if(Input.is_key_pressed(rightButton)):
 		if(velocity < maxTurnVelocity):
 			if(velocity < 0):
 				inc *= 2
 				
 			set_angular_velocity(velocity+inc*delta)
 	
-	if(Input.is_key_pressed(KEY_W) || Input.is_action_pressed("P1_throttle")):
+	if(Input.is_key_pressed(throttleButton)):
 		apply_impulse(Vector2(0,0),-get_global_transform().y)

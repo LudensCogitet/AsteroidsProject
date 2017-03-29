@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Asteroid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Asteroid(small).png" type="Texture" id=2]
+[ext_resource path="res://ShapeAddScript.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"res://Asteroid.gd\"\n\nfunc _ready():\n\t._ready()\n\thealth = 3000\n\nfunc _integrate_forces(state):\n\t._integrate_forces(state)"
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 12.5
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 5 )
+
+[node name="SmallAsteroid" instance=ExtResource( 1 )]
+
+script/script = SubResource( 1 )
+
+[node name="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 2.08767, -1.97169 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+script/script = ExtResource( 3 )
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -7.42282, 7.5388 )
+transform/rot = -45.0
+transform/scale = Vector2( 1, 1 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 1
+script/script = ExtResource( 3 )
+
+
