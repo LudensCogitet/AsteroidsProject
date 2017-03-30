@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Damagable.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Asteroid(big).png" type="Texture" id=2]
+[ext_resource path="res://Asteroid.gd" type="Script" id=2]
+[ext_resource path="res://Asteroid(big).png" type="Texture" id=3]
 
 [node name="Asteroid" instance=ExtResource( 1 )]
 
+script/script = ExtResource( 2 )
+
 [node name="Sprite" type="Sprite" parent="."]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 

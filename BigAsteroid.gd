@@ -1,11 +1,13 @@
 extends "res://Asteroid.gd"
 
-var SmallAsteroid
+var SUB_TYPE = "Big"
 
+var SmallAsteroid
 func _ready():
+	maxHealth = 8000
+	bulletDamageDivisor = 8
 	._ready()
 	SmallAsteroid = preload("res://SmallAsteroid.tscn")
-	health = 6000
 
 func _integrate_forces(state):
 	._integrate_forces(state)
@@ -25,6 +27,7 @@ func _integrate_forces(state):
 		newAsteroid.add_collision_exception_with(self)
 		get_parent().add_child(newAsteroid)
 		newAsteroid.set_pos(offsetVectors[0])
+		newAsteroid.set_linear_velocity(get_linear_velocity())
 		newAsteroid.apply_impulse(newAsteroid.get_pos(),Vector2(rand_range(-1,1)*multi,rand_range(-1,1)*multi))
 		
 		for i in range(1,4):
@@ -32,6 +35,7 @@ func _integrate_forces(state):
 			newAsteroid.add_collision_exception_with(self)
 			get_parent().add_child(newAsteroid)
 			newAsteroid.set_pos(offsetVectors[i])
+			newAsteroid.set_linear_velocity(get_linear_velocity())
 			newAsteroid.apply_impulse(newAsteroid.get_pos(),Vector2(rand_range(-1,1)*multi,rand_range(-1,1)*multi))
 			
 		queue_free()

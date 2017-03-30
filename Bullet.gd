@@ -4,6 +4,7 @@ extends RigidBody2D
 # var a = 2
 # var b = "textvar"
 var die = false
+var TYPE = "Bullet"
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
