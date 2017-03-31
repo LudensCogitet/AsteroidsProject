@@ -9,6 +9,8 @@ var shot = false
 var startPos
 
 onready var flame = get_node("ShipBody/flame")
+onready var flameAnim = get_node("ShipBody/flame/AnimationPlayer")
+var flickering = false
 
 var throttleButton
 var leftButton
@@ -44,6 +46,16 @@ func _integrate_forces(state):
 		get_node("AnimationPlayer").play("Flash")
 
 func _fixed_process(delta):
+	if(flickering == false):
+		if(Input.is_action_pressed(throttleButton)):
+			print("LOL")
+			flameAnim.play("Flicker")
+			flickering = true
+	else:
+		if(!Input.is_action_pressed(throttleButton)):
+			flameAnim.stop()
+			flickering = false
+		
 	if(health < 0):
 		get_parent().get_node("SoundPlayer").play("explosion")
 		set_linear_velocity(Vector2(0,0))
